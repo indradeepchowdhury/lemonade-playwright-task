@@ -1,0 +1,6 @@
+{
+  "name": "lemonade-playwright-task",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Playwright TypeScript tests for Lemonade quote pricing"
+}
