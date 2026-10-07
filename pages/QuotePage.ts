@@ -12,7 +12,7 @@ export class QuotePage {
   }
 
   async open() {
-    await this.page.goto('/quotes/LQ42EE07089');
+    await this.page.goto('quotes/LQ42EE07089');
     await this.coverageHeading.waitFor();
 
     if (await this.acceptCookiesButton.isVisible().catch(() => false)) {

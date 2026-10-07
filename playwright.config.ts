@@ -3,7 +3,7 @@ import { defineConfig, devices } from '@playwright/test';
 export default defineConfig({
   testDir: './tests',
   use: {
-    baseURL: 'https://lemonade-hq.github.io/qa-interview-task',
+    baseURL: 'https://lemonade-hq.github.io/qa-interview-task/',
     headless: true,
   },
   projects: [
