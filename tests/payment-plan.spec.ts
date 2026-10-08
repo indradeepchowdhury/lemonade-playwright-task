@@ -1,12 +1,7 @@
-import { test, expect } from '@playwright/test';
-import { QuotePage } from '../pages/QuotePage';
 import { ANNUAL_DISCOUNT, BillingPeriod } from '../pages/sections/PaymentPlanSection';
-import { QUOTE_ID } from '../utils/constants';
+import { test, expect } from '../fixtures/test';
 
-test('annual billing equals twelve months minus the advertised discount', async ({ page }) => {
-  const quotePage = new QuotePage(page);
-
-  await quotePage.open(QUOTE_ID);
+test('annual billing equals twelve months minus the advertised discount', async ({ quotePage }) => {
   const monthlyPrice = await quotePage.getPrice();
 
   await quotePage.paymentPlan.select(BillingPeriod.Annual);
@@ -17,10 +12,7 @@ test('annual billing equals twelve months minus the advertised discount', async 
   await expect(quotePage.payButton).toContainText('/ year');
 });
 
-test('changing the start date updates the selected value', async ({ page }) => {
-  const quotePage = new QuotePage(page);
-
-  await quotePage.open(QUOTE_ID);
+test('changing the start date updates the selected value', async ({ quotePage }) => {
   const previous = await quotePage.paymentPlan.startDate.innerText();
 
   await quotePage.paymentPlan.changeStartDate();

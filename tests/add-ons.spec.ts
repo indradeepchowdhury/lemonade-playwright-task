@@ -1,13 +1,8 @@
-import { test, expect } from '@playwright/test';
-import { QuotePage } from '../pages/QuotePage';
 import { AddOn } from '../pages/sections/AddOnsSection';
-import { QUOTE_ID } from '../utils/constants';
 import { randomPerson } from '../utils/person';
+import { test, expect } from '../fixtures/test';
 
-test('adding a free spouse add-on does not change the price', async ({ page }) => {
-  const quotePage = new QuotePage(page);
-
-  await quotePage.open(QUOTE_ID);
+test('adding a free spouse add-on does not change the price', async ({ quotePage }) => {
   const startingPrice = await quotePage.getPrice();
 
   const person = randomPerson();
@@ -17,10 +12,7 @@ test('adding a free spouse add-on does not change the price', async ({ page }) =
   await expect.poll(() => quotePage.getPrice()).toBe(startingPrice);
 });
 
-test('adding a paid significant other add-on increases the price', async ({ page }) => {
-  const quotePage = new QuotePage(page);
-
-  await quotePage.open(QUOTE_ID);
+test('adding a paid significant other add-on increases the price', async ({ quotePage }) => {
   const startingPrice = await quotePage.getPrice();
 
   const person = randomPerson();
@@ -30,10 +22,7 @@ test('adding a paid significant other add-on increases the price', async ({ page
   await expect.poll(() => quotePage.getPrice()).toBeGreaterThan(startingPrice);
 });
 
-test('adding water back-up increases the price and removing it decreases the price', async ({ page }) => {
-  const quotePage = new QuotePage(page);
-
-  await quotePage.open(QUOTE_ID);
+test('adding water back-up increases the price and removing it decreases the price', async ({ quotePage }) => {
   const startingPrice = await quotePage.getPrice();
 
   await quotePage.addOns.toggle(AddOn.WaterBackup);
@@ -45,10 +34,7 @@ test('adding water back-up increases the price and removing it decreases the pri
   await expect.poll(() => quotePage.getPrice()).toBeLessThan(priceWithAddOn);
 });
 
-test('adding landlord property damage increases the price', async ({ page }) => {
-  const quotePage = new QuotePage(page);
-
-  await quotePage.open(QUOTE_ID);
+test('adding landlord property damage increases the price', async ({ quotePage }) => {
   const startingPrice = await quotePage.getPrice();
 
   await quotePage.addOns.toggle(AddOn.LandlordPropertyDamage);

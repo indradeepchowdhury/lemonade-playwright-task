@@ -1,22 +1,14 @@
-import { test, expect } from '@playwright/test';
-import { QuotePage } from '../pages/QuotePage';
 import { Deductible } from '../pages/sections/DeductibleSection';
-import { QUOTE_ID } from '../utils/constants';
+import { test, expect } from '../fixtures/test';
 
-test('decreasing the deductible increases the price', async ({ page }) => {
-  const quotePage = new QuotePage(page);
-
-  await quotePage.open(QUOTE_ID);
+test('decreasing the deductible increases the price', async ({ quotePage }) => {
   const startingPrice = await quotePage.getPrice();
 
   await quotePage.deductible.select(Deductible.TwoFifty);
   await expect.poll(() => quotePage.getPrice()).toBeGreaterThan(startingPrice);
 });
 
-test('increasing the deductible decreases the price', async ({ page }) => {
-  const quotePage = new QuotePage(page);
-
-  await quotePage.open(QUOTE_ID);
+test('increasing the deductible decreases the price', async ({ quotePage }) => {
   const startingPrice = await quotePage.getPrice();
 
   await quotePage.deductible.select(Deductible.OneThousand);
