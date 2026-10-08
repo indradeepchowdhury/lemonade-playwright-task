@@ -1,10 +1,12 @@
 import { Locator, Page } from '@playwright/test';
+import { AddOnsSection } from './sections/AddOnsSection';
 import { CoverageSection } from './sections/CoverageSection';
 import { ValuablesSection } from './sections/ValuablesSection';
 
 export class QuotePage {
   readonly coverage: CoverageSection;
   readonly valuables: ValuablesSection;
+  readonly addOns: AddOnsSection;
   readonly coverageHeading: Locator;
   readonly acceptCookiesButton: Locator;
   readonly payButton: Locator;
@@ -12,6 +14,7 @@ export class QuotePage {
   constructor(private readonly page: Page) {
     this.coverage = new CoverageSection(page);
     this.valuables = new ValuablesSection(page);
+    this.addOns = new AddOnsSection(page);
     this.coverageHeading = page.getByRole('heading', { name: 'Coverage Amounts' });
     this.acceptCookiesButton = page.getByRole('button', { name: 'Accept all' });
     this.payButton = page.locator('#gtm_button_pay_main');

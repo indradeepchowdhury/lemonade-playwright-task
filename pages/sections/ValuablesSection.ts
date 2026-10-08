@@ -1,5 +1,5 @@
 import { Locator, Page } from '@playwright/test';
-import { ValuablesDialog } from './ValuablesDialog';
+import { ValuablesDialog } from '../dialogs/ValuablesDialog';
 
 export enum Valuable {
   Jewelry = 'jewelry',

@@ -4,6 +4,7 @@
   "private": true,
   "description": "Playwright tests for Lemonade quote pricing page",
   "devDependencies": {
+    "@faker-js/faker": "10.6.0",
     "@playwright/test": "1.63.0"
   }
 }
