@@ -8,13 +8,13 @@ It covers tests for all the sections on the page. The tests for the checkout fun
 
 ## Test cases covered
 
-- Smoke: page loads with all sections and a non-zero price
-- Coverage: increase / decrease coverage amounts and check price
-- Valuables: add / remove jewelry, bicycle coverage vs add premium
-- Add-ons: spouse (free), significant other, water back-up, landlord property damage
-- Deductible: lower / higher deductible and price impact
-- Payment plan: annual discount math, start date change
-- Checkout: placeholders only (skipped)
+- Smoke: page loads with all sections and has a non zero price
+- Coverage section: increase and decrease coverage amounts and check price changes
+- Valuables section: add and remove jewelry, bicycle coverage and check price changes
+- Add-ons section: spouse (free), significant other, water back-up, landlord property damage tests
+- Deductible section: decrease and increase the deductible and check price impact
+- Payment plan section: verify annual discount math and start date changes
+- Checkout logic: verify checkout logic, but currently just a placeholder because environment does not support
 
 ## Setup
 
@@ -31,13 +31,33 @@ npx playwright install
 ```bash
 # all browsers, headless by default
 npm test
+# or
+npx playwright test
 
-# one particular browser, headless mode
+# Chrome
+npm run test:chromium
+# or
 npx playwright test --project=chromium
+
+# Firefox
+npm run test:firefox
+# or
 npx playwright test --project=firefox
+
+# Webkit
+npm run test:webkit
+# or
 npx playwright test --project=webkit
-# headed
-npx playwright test --project=firefox --headed
+
+# Headed mode
+npm run test:headed
+# or
+npx playwright test --headed
+
+# Headed mode on Chrome
+npm run test:chromium:headed
+# or
+npx playwright test --project=chromium --headed
 ```
 
 Note: The quote page doesn't currently load on WebKit.
@@ -48,11 +68,15 @@ After a run:
 
 ```bash
 # Playwright's built-in HTML report
+npm run report
+# or
 npx playwright show-report
 
 # Allure report
 npm run allure:generate
 npm run allure:open
+# or generate and open in one go
+npm run allure:serve
 ```
 
 ## Structure
