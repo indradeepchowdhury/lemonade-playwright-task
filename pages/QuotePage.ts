@@ -9,7 +9,6 @@ export class QuotePage {
   readonly valuables: ValuablesSection;
   readonly addOns: AddOnsSection;
   readonly deductible: DeductibleSection;
-  readonly coverageHeading: Locator;
   readonly acceptCookiesButton: Locator;
   readonly payButton: Locator;
 
@@ -18,14 +17,13 @@ export class QuotePage {
     this.valuables = new ValuablesSection(page);
     this.addOns = new AddOnsSection(page);
     this.deductible = new DeductibleSection(page);
-    this.coverageHeading = page.getByRole('heading', { name: 'Coverage Amounts' });
     this.acceptCookiesButton = page.getByRole('button', { name: 'Accept all' });
     this.payButton = page.locator('#gtm_button_pay_main');
   }
 
   async open(quoteId: string) {
     await this.page.goto(`quotes/${quoteId}`);
-    await this.coverageHeading.waitFor();
+    await this.coverage.section.waitFor();
 
     // Clear the cookie banner if it is visible
     if (await this.acceptCookiesButton.isVisible().catch(() => false)) {

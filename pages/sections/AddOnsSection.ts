@@ -11,11 +11,17 @@ export enum AddOn {
 }
 
 export class AddOnsSection {
+  readonly section: Locator;
   readonly person: PersonDialog;
   readonly waterBackup: WaterBackupDialog;
   readonly landlordPropertyDamage: LandlordPropertyDamageDialog;
 
   constructor(private readonly page: Page) {
+    this.section = page
+      .locator('div')
+      .filter({ has: page.getByRole('heading', { name: 'Policy Options' }) })
+      .filter({ has: page.locator('#addon-water_backup') })
+      .last();
     this.person = new PersonDialog(page);
     this.waterBackup = new WaterBackupDialog(page);
     this.landlordPropertyDamage = new LandlordPropertyDamageDialog(page);

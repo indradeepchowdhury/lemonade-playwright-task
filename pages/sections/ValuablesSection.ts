@@ -7,9 +7,11 @@ export enum Valuable {
 }
 
 export class ValuablesSection {
+  readonly section: Locator;
   readonly dialog: ValuablesDialog;
 
   constructor(private readonly page: Page) {
+    this.section = page.locator('#valuable-items');
     this.dialog = new ValuablesDialog(page);
   }
 

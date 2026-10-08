@@ -8,18 +8,17 @@ export enum Deductible {
 }
 
 export class DeductibleSection {
-  constructor(private readonly page: Page) {}
+  readonly section: Locator;
 
-  private card(): Locator {
-    return this.page.getByRole('article').filter({
-      has: this.page.getByRole('heading', { name: 'Deductible', exact: true }),
+  constructor(private readonly page: Page) {
+    this.section = page.getByRole('article').filter({
+      has: page.getByRole('heading', { name: 'Deductible', exact: true }),
     });
   }
 
   async select(amount: Deductible) {
-    const card = this.card();
-    await card.scrollIntoViewIfNeeded();
-    await card.getByTestId('select-header').click();
+    await this.section.scrollIntoViewIfNeeded();
+    await this.section.getByTestId('select-header').click();
     await this.page.getByRole('option', { name: amount, exact: true }).click();
   }
 }

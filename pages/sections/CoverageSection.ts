@@ -6,7 +6,14 @@ export enum Coverage {
 }
 
 export class CoverageSection {
-  constructor(private readonly page: Page) {}
+  readonly section: Locator;
+
+  constructor(private readonly page: Page) {
+    this.section = page
+      .locator('div')
+      .filter({ has: page.getByRole('heading', { name: 'Coverage Amounts' }) })
+      .last();
+  }
 
   private card(coverage: Coverage): Locator {
     return this.page
