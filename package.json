@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "private": true,
   "description": "Playwright tests for Lemonade quote pricing page",
+  "engines": {
+    "node": "22.18.0"
+  },
   "scripts": {
     "test": "playwright test",
     "allure:generate": "allure generate allure-results --clean -o allure-report",
