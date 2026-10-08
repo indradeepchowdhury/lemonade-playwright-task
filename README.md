@@ -85,7 +85,7 @@ GitHub Actions runs on every push.
 
 Download the `playwright-report` artifact from the Actions run, unzip it, and open `index.html`.
 
-Only run Chrome.
+Currently the workflow runs the tests only on Chrome.
 
 ## Structure
 
