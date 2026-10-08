@@ -64,7 +64,7 @@ Note: The quote page doesn't currently load on WebKit.
 
 ## Reports
 
-After a run:
+After a run locally:
 
 ```bash
 # Playwright's built-in HTML report
@@ -78,6 +78,14 @@ npm run allure:open
 # or generate and open in one go
 npm run allure:serve
 ```
+
+## CI
+
+GitHub Actions runs on every push.
+
+Download the `playwright-report` artifact from the Actions run, unzip it, and open `index.html`.
+
+Only run Chrome.
 
 ## Structure
 
