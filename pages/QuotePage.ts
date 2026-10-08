@@ -2,6 +2,7 @@ import { Locator, Page } from '@playwright/test';
 import { AddOnsSection } from './sections/AddOnsSection';
 import { CoverageSection } from './sections/CoverageSection';
 import { DeductibleSection } from './sections/DeductibleSection';
+import { PaymentPlanSection } from './sections/PaymentPlanSection';
 import { ValuablesSection } from './sections/ValuablesSection';
 
 export class QuotePage {
@@ -9,6 +10,7 @@ export class QuotePage {
   readonly valuables: ValuablesSection;
   readonly addOns: AddOnsSection;
   readonly deductible: DeductibleSection;
+  readonly paymentPlan: PaymentPlanSection;
   readonly acceptCookiesButton: Locator;
   readonly payButton: Locator;
 
@@ -17,6 +19,7 @@ export class QuotePage {
     this.valuables = new ValuablesSection(page);
     this.addOns = new AddOnsSection(page);
     this.deductible = new DeductibleSection(page);
+    this.paymentPlan = new PaymentPlanSection(page);
     this.acceptCookiesButton = page.getByRole('button', { name: 'Accept all' });
     this.payButton = page.locator('#gtm_button_pay_main');
   }
