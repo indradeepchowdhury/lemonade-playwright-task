@@ -2,6 +2,7 @@ import { test, expect } from '@playwright/test';
 import { QuotePage } from '../pages/QuotePage';
 import { AddOn } from '../pages/sections/AddOnsSection';
 import { Coverage } from '../pages/sections/CoverageSection';
+import { Deductible } from '../pages/sections/DeductibleSection';
 import { Valuable } from '../pages/sections/ValuablesSection';
 import { randomPerson } from '../utils/person';
 
@@ -134,4 +135,24 @@ test('adding landlord property damage increases the price', async ({ page }) => 
   await quotePage.addOns.addLandlordPropertyDamage(true, false);
 
   await expect.poll(() => quotePage.getPrice()).toBeGreaterThan(startingPrice);
+});
+
+test('decreasing the deductible increases the price', async ({ page }) => {
+  const quotePage = new QuotePage(page);
+
+  await quotePage.open(QUOTE_ID);
+  const startingPrice = await quotePage.getPrice();
+
+  await quotePage.deductible.select(Deductible.TwoFifty);
+  await expect.poll(() => quotePage.getPrice()).toBeGreaterThan(startingPrice);
+});
+
+test('increasing the deductible decreases the price', async ({ page }) => {
+  const quotePage = new QuotePage(page);
+
+  await quotePage.open(QUOTE_ID);
+  const startingPrice = await quotePage.getPrice();
+
+  await quotePage.deductible.select(Deductible.OneThousand);
+  await expect.poll(() => quotePage.getPrice()).toBeLessThan(startingPrice);
 });

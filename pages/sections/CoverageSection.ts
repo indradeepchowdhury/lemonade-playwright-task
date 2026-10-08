@@ -8,7 +8,7 @@ export enum Coverage {
 export class CoverageSection {
   constructor(private readonly page: Page) {}
 
-  private coverageCard(coverage: Coverage): Locator {
+  private card(coverage: Coverage): Locator {
     return this.page
       .locator('div')
       .filter({ has: this.page.getByRole('heading', { name: coverage }) })
@@ -16,10 +16,10 @@ export class CoverageSection {
   }
 
   async increase(coverage: Coverage) {
-    await this.coverageCard(coverage).getByLabel('increase').click();
+    await this.card(coverage).getByLabel('increase').click();
   }
 
   async decrease(coverage: Coverage) {
-    await this.coverageCard(coverage).getByLabel('decrease').click();
+    await this.card(coverage).getByLabel('decrease').click();
   }
 }
