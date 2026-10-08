@@ -16,3 +16,13 @@ test('annual billing equals twelve months minus the advertised discount', async 
     .toBeCloseTo(monthlyPrice * 12 - ANNUAL_DISCOUNT, 2);
   await expect(quotePage.payButton).toContainText('/ year');
 });
+
+test('changing the start date updates the selected value', async ({ page }) => {
+  const quotePage = new QuotePage(page);
+
+  await quotePage.open(QUOTE_ID);
+  const previous = await quotePage.paymentPlan.startDate.innerText();
+
+  await quotePage.paymentPlan.changeStartDate();
+  await expect(quotePage.paymentPlan.startDate).not.toHaveText(previous);
+});

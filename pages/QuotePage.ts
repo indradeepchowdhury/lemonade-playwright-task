@@ -1,4 +1,5 @@
 import { Locator, Page } from '@playwright/test';
+import { ActivateInsuranceSection } from './sections/ActivateInsuranceSection';
 import { AddOnsSection } from './sections/AddOnsSection';
 import { CoverageSection } from './sections/CoverageSection';
 import { DeductibleSection } from './sections/DeductibleSection';
@@ -11,8 +12,10 @@ export class QuotePage {
   readonly addOns: AddOnsSection;
   readonly deductible: DeductibleSection;
   readonly paymentPlan: PaymentPlanSection;
+  readonly activateInsurance: ActivateInsuranceSection;
   readonly acceptCookiesButton: Locator;
   readonly payButton: Locator;
+  readonly payButtons: Locator;
 
   constructor(private readonly page: Page) {
     this.coverage = new CoverageSection(page);
@@ -20,8 +23,10 @@ export class QuotePage {
     this.addOns = new AddOnsSection(page);
     this.deductible = new DeductibleSection(page);
     this.paymentPlan = new PaymentPlanSection(page);
+    this.activateInsurance = new ActivateInsuranceSection(page);
     this.acceptCookiesButton = page.getByRole('button', { name: 'Accept all' });
     this.payButton = page.locator('#gtm_button_pay_main');
+    this.payButtons = page.getByRole('button', { name: 'Pay' });
   }
 
   async open(quoteId: string) {
